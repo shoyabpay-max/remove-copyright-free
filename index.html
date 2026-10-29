@@ -136,7 +136,84 @@ function startWorkflow(){
  const settings={language:document.getElementById('language').value,format:document.getElementById('format').value,voice:document.getElementById('voice').value,quality:document.getElementById('quality').value,style:document.getElementById('style').value};  
  showStatus('Your edit settings are ready: '+settings.language+' subtitles, '+settings.format+' format, '+settings.quality+' export. This is a frontend prototype: connect an AI/video-processing backend to render and download an edited MP4.','warn');  
 }  
-function showPlanInfo(){alert('Starter Plan (proposed): ₹49/month · 15 exports per billing month · up to 20 minutes per source video · 1080p export · limited AI voice-over. Payments and subscription enforcement are not connected in this prototype.');}  
-</script>  
+
+function showPlanInfo() {
+  startPayment();
+}  
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+async function startPayment() {
+  try {
+    const response = await fetch(
+      "https://remove-copyright-free-1.onrender.com/api/create-order",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({})
+      }
+    );
+
+    const order = await response.json();
+
+    if (!response.ok || !order.order_id || !order.key_id) {
+      throw new Error(order.error || "Order create nahi hua.");
+    }
+
+    const options = {
+      key: order.key_id,
+      amount: order.amount,
+      currency: order.currency,
+      name: "AI Video Studio",
+      description: "Starter Plan",
+      order_id: order.order_id,
+
+      handler: async function (payment) {
+        const verifyResponse = await fetch(
+          "https://remove-copyright-free-1.onrender.com/api/verify-payment",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_payment_id: payment.razorpay_payment_id,
+              razorpay_order_id: payment.razorpay_order_id,
+              razorpay_signature: payment.razorpay_signature
+            })
+          }
+        );
+
+        const result = await verifyResponse.json();
+
+        if (verifyResponse.ok && result.status === "success") {
+          alert("Payment verified successfully!");
+        } else {
+          alert("Payment verification nahi ho payi. Status check karein.");
+        }
+      },
+
+      modal: {
+        ondismiss: function () {
+          console.log("Checkout closed");
+        }
+      },
+
+      theme: { color: "#7c5cff" }
+    };
+
+    const checkout = new Razorpay(options);
+
+    checkout.on("payment.failed", function (event) {
+      alert("Payment failed: " + event.error.description);
+    });
+
+    checkout.open();
+
+  } catch (error) {
+    alert("Error: " + error.message);
+  }
+}
+</script>
+</body>
+</html>
 </body>  
 </html>

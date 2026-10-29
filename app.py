@@ -3,6 +3,7 @@ import os
 import hmac
 import hashlib
 import uuid
+import logging
 import razorpay
 
 from flask import Flask, jsonify, request
@@ -10,11 +11,13 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+logging.basicConfig(level=logging.INFO)
 
 KEY_ID = os.environ.get("RAZORPAY_KEY_ID")
 KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
 
 client = None
+
 if KEY_ID and KEY_SECRET:
     client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
 
@@ -32,7 +35,10 @@ def home():
 @app.route("/api/create-order", methods=["POST"])
 def create_order():
     if not client:
-        return jsonify({"error": "Payment service not configured"}), 500
+        app.logger.error("Payment service is not configured")
+        return jsonify({
+            "error": "Payment service not configured"
+        }), 500
 
     try:
         order = client.order.create({
@@ -46,47 +52,67 @@ def create_order():
             "order_id": order["id"],
             "amount": order["amount"],
             "currency": order["currency"]
-        })
+        }), 200
 
-    except Exception:
+    except Exception as e:
+        # Server logs contain the diagnostic details.
         app.logger.exception("Order creation failed")
-        return jsonify({"error": "Could not create order"}), 500
+        return jsonify({
+            "error": "Could not create order",
+            "details": str(e)
+        }), 500
 
 
 @app.route("/api/verify-payment", methods=["POST"])
 def verify_payment():
     if not client:
-        return jsonify({"error": "Payment service not configured"}), 500
+        return jsonify({
+            "error": "Payment service not configured"
+        }), 500
 
     data = request.get_json(silent=True) or {}
+
     order_id = data.get("razorpay_order_id", "")
     payment_id = data.get("razorpay_payment_id", "")
     signature = data.get("razorpay_signature", "")
 
     if not all([order_id, payment_id, signature]):
-        return jsonify({"error": "Missing payment details"}), 400
+        return jsonify({
+            "verified": False,
+            "error": "Missing payment details"
+        }), 400
 
     message = f"{order_id}|{payment_id}"
+
     expected = hmac.new(
-        KEY_SECRET.encode(),
-        message.encode(),
+        KEY_SECRET.encode("utf-8"),
+        message.encode("utf-8"),
         hashlib.sha256
     ).hexdigest()
 
     if not hmac.compare_digest(expected, signature):
-        return jsonify({"verified": False, "error": "Invalid signature"}), 400
+        return jsonify({
+            "verified": False,
+            "error": "Invalid signature"
+        }), 400
 
     try:
         payment = client.payment.fetch(payment_id)
 
         if payment.get("order_id") != order_id:
-            return jsonify({"verified": False, "error": "Order mismatch"}), 400
+            return jsonify({
+                "verified": False,
+                "error": "Order mismatch"
+            }), 400
 
         if (
             payment.get("amount") != PLAN_AMOUNT
             or payment.get("currency") != "INR"
         ):
-            return jsonify({"verified": False, "error": "Amount mismatch"}), 400
+            return jsonify({
+                "verified": False,
+                "error": "Amount mismatch"
+            }), 400
 
         if payment.get("status") != "captured":
             return jsonify({
@@ -98,11 +124,14 @@ def verify_payment():
         return jsonify({
             "verified": True,
             "message": "Payment verified successfully"
-        })
+        }), 200
 
     except Exception:
         app.logger.exception("Payment verification failed")
-        return jsonify({"error": "Could not verify payment"}), 500
+        return jsonify({
+            "verified": False,
+            "error": "Could not verify payment"
+        }), 500
 
 
 if __name__ == "__main__":

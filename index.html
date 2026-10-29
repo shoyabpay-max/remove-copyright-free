@@ -1,152 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101827">
-<title>Remove Copyright Free — AI Video Studio</title>
-<style>
-:root{--bg:#0b1120;--panel:#121c2e;--panel2:#17243a;--line:#283750;--text:#f3f6fb;--muted:#a7b4c8;--blue:#69a7ff;--green:#54d6a0;--pink:#c4a1ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#172a49 0%,var(--bg) 46%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:700}
-.wrap{max-width:1160px;margin:auto;padding:22px}.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:32px}.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:-.4px}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#4f8cff,#9d77ff);font-size:23px}.navtag{font-size:13px;color:var(--green);border:1px solid #285b51;background:#112a2a;padding:6px 10px;border-radius:99px}
-.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:stretch;margin-bottom:25px}.heroMain,.planCard,.panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(23,36,58,.96),rgba(15,24,40,.96));box-shadow:0 18px 50px #0002}.heroMain{padding:32px}.eyebrow{color:var(--blue);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px}.hero h1{font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-1.7px;margin:13px 0}.hero p{color:var(--muted);max-width:630px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.primary{background:linear-gradient(135deg,#5c9cff,#8b7bff);color:white}.secondary{background:#24334a;color:var(--text);border:1px solid #3b4d68}.planCard{padding:24px;display:flex;flex-direction:column;justify-content:space-between}.planTop{display:flex;justify-content:space-between;align-items:center;gap:8px}.pill{font-size:12px;border-radius:99px;padding:5px 9px;background:#183d36;color:var(--green);font-weight:800}.price{font-size:42px;font-weight:850;letter-spacing:-1px;margin:14px 0 0}.price small{font-size:15px;color:var(--muted);font-weight:500;letter-spacing:0}.features{list-style:none;padding:0;margin:17px 0 22px}.features li{margin:9px 0;color:#dce5f2}.features li:before{content:"✓";color:var(--green);font-weight:900;margin-right:10px}
-.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.panel{padding:24px}.panel h2{font-size:21px;margin:0 0 5px}.sub{color:var(--muted);font-size:14px;margin:0 0 18px}.drop{border:1.5px dashed #4b6385;border-radius:17px;background:#0f1a2b;padding:25px 15px;text-align:center;transition:.2s}.drop.drag{border-color:var(--blue);background:#142744}.drop .bigicon{font-size:34px}.drop strong{display:block;margin:6px 0}.drop p{color:var(--muted);font-size:13px;margin:5px 0 15px}.filebtn{display:inline-block;background:#263a58;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}.hidden{display:none}.or{text-align:center;color:#71819a;font-size:12px;margin:14px}.linkrow{display:flex;gap:8px}.linkrow input,.field input,.field select{width:100%;min-width:0;background:#0c1525;border:1px solid #31425c;color:var(--text);padding:12px;border-radius:11px;outline:none}.linkrow input:focus,.field input:focus,.field select:focus{border-color:var(--blue)}.note{font-size:12px;color:#9eabc0;margin-top:8px}.preview{width:100%;aspect-ratio:16/9;background:#070b13;border-radius:14px;overflow:hidden;display:grid;place-items:center;margin-top:15px;color:#71819a;text-align:center}.preview video{width:100%;height:100%;object-fit:contain;background:#000}.filename{font-size:13px;color:var(--green);margin-top:9px;overflow-wrap:anywhere}.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}.field label{display:block;font-size:13px;color:#c4cfdf;margin-bottom:7px}.field.full{grid-column:1/-1}.check{display:flex;align-items:flex-start;gap:10px;color:#c8d3e4;font-size:13px;margin-top:16px}.check input{margin-top:5px;accent-color:#69a7ff}.run{width:100%;margin-top:18px;background:linear-gradient(135deg,#54d6a0,#5ba9ff);color:#081323}.status{display:none;margin-top:15px;padding:13px;border-radius:12px;background:#102c29;border:1px solid #286154;color:#b8f6dd;font-size:14px}.status.show{display:block}.status.warn{background:#302517;border-color:#6c512a;color:#ffe0a3}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.step{border:1px solid var(--line);background:#101a2b;border-radius:14px;padding:15px}.step b{display:block;margin:7px 0 4px}.step span{font-size:13px;color:var(--muted)}.stepicon{font-size:23px}.footer{color:#7f8da3;font-size:12px;text-align:center;padding:28px 8px 8px}
-@media(max-width:800px){.hero,.grid{grid-template-columns:1fr}.heroMain{padding:24px}.planCard{gap:8px}.steps{grid-template-columns:1fr}.wrap{padding:15px}.nav{margin-bottom:20px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <header class="nav">
-    <div class="brand"><div class="logo">▶</div><span>Remove Copyright Free</span></div>
-    <div class="navtag">● AI STUDIO PREVIEW</div>
-  </header>
 
-  <section class="hero">
-    <div class="heroMain">
-      <div class="eyebrow">Create responsibly with AI</div>
-      <h1>Your video.<br>Smarter editing.</h1>
-      <p>Upload a video or add a source link, choose your editing preferences, and prepare a polished video workflow with subtitles, voice-over and export settings.</p>
-      <div class="actions">
-        <button class="primary" onclick="document.getElementById('videoFile').click()">＋ Upload a video</button>
-        <button class="secondary" onclick="document.getElementById('editor').scrollIntoView({behavior:'smooth'})">Open editor ↓</button>
-      </div>
-    </div>
-    <aside class="planCard">
-      <div>
-        <div class="planTop"><strong>Starter Plan</strong><span class="pill">LOW COST</span></div>
-        <div class="price">₹49 <small>/ month</small></div>
-        <div class="sub">Planned subscription · 15 exports monthly</div>
-        <ul class="features">
-          <li>Up to 20 minutes per source video</li>
-          <li>Hindi subtitles</li>
-          <li>Limited AI voice-over</li>
-          <li>1080p watermark-free export</li>
-          <li>One job at a time</li>
-        </ul>
-      </div>
-      <button class="secondary" onclick="showPlanInfo()">View plan details</button>
-    </aside>
-  </section>
+import os
+import hmac
+import hashlib
+import uuid
+import razorpay
 
-  <section class="grid" id="editor">
-    <div class="panel">
-      <h2>1. Add your video</h2>
-      <p class="sub">Choose a file from your device or provide a link to content you own or are authorized to use.</p>
-      <div class="drop" id="dropZone">
-        <div class="bigicon">⬆</div>
-        <strong>Drop your video here</strong>
-        <p>MP4, MOV or WebM · Maximum 20 minutes in Starter</p>
-        <label class="filebtn" for="videoFile">Choose video</label>
-        <input class="hidden" type="file" id="videoFile" accept="video/mp4,video/quicktime,video/webm,video/*">
-      </div>
-      <div class="or">— OR AUTHORIZED SOURCE LINK —</div>
-      <div class="linkrow">
-        <input id="sourceLink" type="url" placeholder="Paste a video URL">
-        <button class="secondary" onclick="checkLink()">Check</button>
-      </div>
-      <div class="note">A YouTube URL cannot be downloaded by this demo. Use your original file or an authorized import integration.</div>
-      <div class="preview" id="preview"><div><div style="font-size:32px">▣</div><div>Your video preview appears here</div></div></div>
-      <div class="filename" id="fileInfo"></div>
-    </div>
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
-    <div class="panel">
-      <h2>2. AI editing settings</h2>
-      <p class="sub">Choose a draft workflow. Real AI processing needs a connected backend.</p>
-      <div class="fields">
-        <div class="field">
-          <label for="language">Subtitle language</label>
-          <select id="language"><option>Hindi</option><option>English</option><option>Hinglish</option><option>Punjabi</option></select>
-        </div>
-        <div class="field">
-          <label for="format">Video format</label>
-          <select id="format"><option value="landscape">YouTube 16:9</option><option value="vertical">Shorts / Reels 9:16</option><option value="square">Square 1:1</option></select>
-        </div>
-        <div class="field">
-          <label for="voice">Voice-over</label>
-          <select id="voice"><option>Off</option><option>Hindi — neutral</option><option>Hindi — energetic</option><option>English — neutral</option></select>
-        </div>
-        <div class="field">
-          <label for="quality">Export quality</label>
-          <select id="quality"><option>1080p</option><option>720p</option></select>
-        </div>
-        <div class="field full">
-          <label for="style">Editing style</label>
-          <select id="style"><option>Balanced — clean cuts and transitions</option><option>Fast-paced — tighter cuts</option><option>Talking-head — captions and pauses</option><option>Educational — chapter-style sections</option></select>
-        </div>
-      </div>
-      <label class="check"><input type="checkbox" id="rights"> <span>I own this video or have permission to use it, and I have the necessary rights for any music, clips, and images.</span></label>
-      <button class="run" onclick="startWorkflow()">Prepare AI edit</button>
-      <div class="status" id="status"></div>
-    </div>
-  </section>
+app = Flask(__name__)
+CORS(app)
 
-  <section class="steps">
-    <div class="step"><div class="stepicon">✂️</div><b>Smart editing</b><span>Plan scene cuts, remove long pauses and apply transitions.</span></div>
-    <div class="step"><div class="stepicon">💬</div><b>Captions & voice</b><span>Generate subtitles and optional narration when AI services are connected.</span></div>
-    <div class="step"><div class="stepicon">⬇️</div><b>Export & upload</b><span>Review the finished MP4 and upload it manually to YouTube.</span></div>
-  </section>
+KEY_ID = os.environ.get("RAZORPAY_KEY_ID")
+KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
 
-  <div class="footer">Prototype only · No payment is collected · No video is uploaded to a server · Copyright claims cannot be guaranteed away.</div>
-</div>
-<script>
-const fileInput=document.getElementById('videoFile'), drop=document.getElementById('dropZone'), preview=document.getElementById('preview'), fileInfo=document.getElementById('fileInfo'), statusBox=document.getElementById('status');
-let objectUrl=null, selectedFile=null;
-function formatBytes(bytes){if(bytes<1024*1024)return (bytes/1024).toFixed(0)+' KB';return (bytes/(1024*1024)).toFixed(1)+' MB'}
-function loadFile(file){
-  if(!file)return;
-  if(!file.type.startsWith('video/')){alert('Please choose a video file.');return;}
-  selectedFile=file;
-  if(objectUrl)URL.revokeObjectURL(objectUrl);
-  objectUrl=URL.createObjectURL(file);
-  preview.innerHTML='';
-  const video=document.createElement('video');video.src=objectUrl;video.controls=true;video.playsInline=true;preview.appendChild(video);
-  fileInfo.textContent=file.name+' · '+formatBytes(file.size);
-  video.onloadedmetadata=()=>{const mins=video.duration/60;fileInfo.textContent=file.name+' · '+formatBytes(file.size)+' · '+(mins.toFixed(1))+' minutes';if(mins>20){showStatus('This video is longer than the Starter Plan limit of 20 minutes. Choose a shorter video or define a higher plan limit.','warn');}};
-  statusBox.className='status';statusBox.textContent='';
-}
-fileInput.addEventListener('change',e=>loadFile(e.target.files[0]));
-drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag')});
-drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));
-drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');loadFile(e.dataTransfer.files[0])});
-function showStatus(msg,type=''){statusBox.textContent=msg;statusBox.className='status show'+(type?' '+type:'')}
-function checkLink(){
- const value=document.getElementById('sourceLink').value.trim();
- if(!value){showStatus('Paste a source URL first.','warn');return;}
- try{const u=new URL(value);if(!['http:','https:'].includes(u.protocol))throw new Error();showStatus('Link format looks valid. This prototype does not fetch or download linked videos. Import must be implemented using an authorized source/API.','warn');}
- catch(e){showStatus('Please enter a valid URL beginning with https://','warn');}
-}
-function startWorkflow(){
- if(!selectedFile && !document.getElementById('sourceLink').value.trim()){showStatus('First upload a video file or enter an authorized source link.','warn');return;}
- if(!document.getElementById('rights').checked){showStatus('Please confirm you have the rights or permission to use this content before continuing.','warn');return;}
- if(selectedFile){
-   const video=preview.querySelector('video');
-   if(video && video.duration>20*60){showStatus('This source exceeds the 20-minute Starter limit. Please choose a shorter video.','warn');return;}
- }
- const settings={language:document.getElementById('language').value,format:document.getElementById('format').value,voice:document.getElementById('voice').value,quality:document.getElementById('quality').value,style:document.getElementById('style').value};
- showStatus('Your edit settings are ready: '+settings.language+' subtitles, '+settings.format+' format, '+settings.quality+' export. This is a frontend prototype: connect an AI/video-processing backend to render and download an edited MP4.','warn');
-}
-function showPlanInfo(){alert('Starter Plan (proposed): ₹49/month · 15 exports per billing month · up to 20 minutes per source video · 1080p export · limited AI voice-over. Payments and subscription enforcement are not connected in this prototype.');}
-</script>
-</body>
-</html>
+client = None
+if KEY_ID and KEY_SECRET:
+    client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
+
+PLAN_AMOUNT = 4900  # ₹49 in paise
+
+
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "status": "success",
+        "message": "Razorpay backend is running"
+    })
+
+
+@app.route("/api/create-order", methods=["POST"])
+def create_order():
+    if not client:
+        return jsonify({"error": "Payment service not configured"}), 500
+
+    try:
+        order = client.order.create({
+            "amount": PLAN_AMOUNT,
+            "currency": "INR",
+            "receipt": "starter_" + uuid.uuid4().hex[:20]
+        })
+
+        return jsonify({
+            "key_id": KEY_ID,
+            "order_id": order["id"],
+            "amount": order["amount"],
+            "currency": order["currency"]
+        })
+
+    except Exception:
+        app.logger.exception("Order creation failed")
+        return jsonify({"error": "Could not create order"}), 500
+
+
+@app.route("/api/verify-payment", methods=["POST"])
+def verify_payment():
+    if not client:
+        return jsonify({"error": "Payment service not configured"}), 500
+
+    data = request.get_json(silent=True) or {}
+    order_id = data.get("razorpay_order_id", "")
+    payment_id = data.get("razorpay_payment_id", "")
+    signature = data.get("razorpay_signature", "")
+
+    if not all([order_id, payment_id, signature]):
+        return jsonify({"error": "Missing payment details"}), 400
+
+    message = f"{order_id}|{payment_id}"
+    expected = hmac.new(
+        KEY_SECRET.encode(),
+        message.encode(),
+        hashlib.sha256
+    ).hexdigest()
+
+    if not hmac.compare_digest(expected, signature):
+        return jsonify({"verified": False, "error": "Invalid signature"}), 400
+
+    try:
+        payment = client.payment.fetch(payment_id)
+
+        if payment.get("order_id") != order_id:
+            return jsonify({"verified": False, "error": "Order mismatch"}), 400
+
+        if (
+            payment.get("amount") != PLAN_AMOUNT
+            or payment.get("currency") != "INR"
+        ):
+            return jsonify({"verified": False, "error": "Amount mismatch"}), 400
+
+        if payment.get("status") != "captured":
+            return jsonify({
+                "verified": False,
+                "status": payment.get("status"),
+                "message": "Payment is not captured yet"
+            }), 400
+
+        return jsonify({
+            "verified": True,
+            "message": "Payment verified successfully"
+        })
+
+    except Exception:
+        app.logger.exception("Payment verification failed")
+        return jsonify({"error": "Could not verify payment"}), 500
+
+
+if __name__ == "__main__":
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 10000))
+    )

@@ -270,8 +270,13 @@ async function startPayment() {
     const orderData = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      throw new Error(orderData.error || orderData.message ||
-        "Backend could not create the order. HTTP " + response.status);
+      throw new Error(
+  orderData.details ||
+  orderData.error ||
+  orderData.message ||
+  "Backend could not create the order. HTTP " + response.status
+);
+        
     }
 
     const orderId = orderData.order_id ||

@@ -2,185 +2,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090d18">
-  <title>AI Video Studio</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #090d18;
-      color: #f5f7ff;
-    }
-    header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #273047;
-      font-size: 21px;
-      font-weight: bold;
-    }
-    header span { color: #8b7bff; }
-    main {
-      width: min(900px, 100%);
-      margin: auto;
-      padding: 24px 16px 50px;
-    }
-    .hero { text-align: center; padding: 25px 0; }
-    .tag {
-      color: #b9afff;
-      background: #201b3c;
-      padding: 8px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      font-size: 12px;
-    }
-    h1 { font-size: clamp(30px, 7vw, 48px); margin: 20px 0 12px; }
-    .muted { color: #a7b0c5; line-height: 1.6; }
-    .panel {
-      background: #111827;
-      border: 1px solid #29334a;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 18px 0;
-    }
-    h2 { font-size: 20px; margin-top: 0; }
-    label { display: block; margin: 15px 0 8px; }
-    input[type="file"] {
-      width: 100%;
-      padding: 13px;
-      background: #0a1020;
-      color: white;
-      border: 1px solid #39445c;
-      border-radius: 9px;
-    }
-    input[type="checkbox"] { margin-right: 8px; }
-    button {
-      border: 0;
-      border-radius: 10px;
-      padding: 14px 18px;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    button:disabled { opacity: .6; cursor: wait; }
-    .primary {
-      background: #7565ff;
-      color: white;
-      width: 100%;
-      margin-top: 16px;
-    }
-    .secondary {
-      background: #202a40;
-      color: white;
-      margin-top: 12px;
-    }
-    .preview {
-      width: 100%;
-      max-height: 360px;
-      margin-top: 15px;
-      border-radius: 10px;
-      background: #080b12;
-    }
-    .status {
-      display: none;
-      padding: 13px;
-      border-radius: 9px;
-      margin-top: 15px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-    .status.show { display: block; }
-    .info { background: #17253a; color: #d8e9ff; }
-    .success { background: #143425; color: #aaf4c7; }
-    .error { background: #3a1b25; color: #ffc2cc; }
-    .price { font-size: 32px; font-weight: bold; margin: 12px 0; }
-    footer {
-      text-align: center;
-      color: #8993a9;
-      font-size: 13px;
-      padding: 20px;
-    }
-    a { color: #b9afff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
+<title>AI Video Studio</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#090d18;color:#f5f7ff
+}
+header{
+ padding:18px 20px;border-bottom:1px solid #273047;
+ font-size:21px;font-weight:bold
+}
+header span{color:#8b7bff}
+main{width:min(900px,100%);margin:auto;padding:24px 16px 50px}
+.hero{text-align:center;padding:25px 0}
+.tag{
+ color:#b9afff;background:#201b3c;padding:8px 12px;
+ border-radius:20px;display:inline-block;font-size:12px
+}
+h1{font-size:clamp(30px,7vw,48px);margin:20px 0 12px}
+.muted{color:#a7b0c5;line-height:1.6}
+.panel{
+ background:#111827;border:1px solid #29334a;
+ border-radius:16px;padding:20px;margin:18px 0
+}
+h2{font-size:20px;margin-top:0}
+label{display:block;margin:15px 0 8px}
+input[type=file]{
+ width:100%;padding:13px;background:#0a1020;color:white;
+ border:1px solid #39445c;border-radius:9px
+}
+input[type=checkbox]{margin-right:8px}
+button{
+ border:0;border-radius:10px;padding:14px 18px;
+ font-weight:bold;font-size:15px;cursor:pointer
+}
+button:disabled{opacity:.6;cursor:wait}
+.primary{
+ background:#7565ff;color:white;width:100%;margin-top:16px
+}
+.secondary{background:#202a40;color:white;margin-top:12px}
+.preview{
+ width:100%;max-height:360px;margin-top:15px;
+ border-radius:10px;background:#080b12
+}
+.status{
+ display:none;padding:13px;border-radius:9px;
+ margin-top:15px;line-height:1.5;overflow-wrap:anywhere
+}
+.status.show{display:block}
+.info{background:#17253a;color:#d8e9ff}
+.success{background:#143425;color:#aaf4c7}
+.error{background:#3a1b25;color:#ffc2cc}
+.price{font-size:32px;font-weight:bold;margin:12px 0}
+footer{text-align:center;color:#8993a9;font-size:13px;padding:20px}
+</style>
 </head>
 
 <body>
 <header>AI <span>Video Studio</span></header>
 
 <main>
-  <section class="hero">
-    <span class="tag">CREATOR TOOLS</span>
-    <h1>Create videos your way.</h1>
-    <p class="muted">
-      Preview your video, explore creator tools, and test the payment
-      integration securely.
-    </p>
-  </section>
+<section class="hero">
+<span class="tag">CREATOR TOOLS</span>
+<h1>Create videos your way.</h1>
+<p class="muted">
+Preview your video and explore creator tools.
+This demo uses Razorpay Test Mode only.
+</p>
+</section>
 
-  <section class="panel">
-    <h2>1. Video Preview</h2>
-    <p class="muted">
-      Choose a video from your device to preview it. This demo does not
-      automatically edit videos or remove copyright.
-    </p>
+<section class="panel">
+<h2>1. Video Preview</h2>
+<p class="muted">Choose a video from your device to preview it.</p>
 
-    <label for="videoFile">Select a video</label>
-    <input id="videoFile" type="file" accept="video/*">
+<label for="videoFile">Select a video</label>
+<input id="videoFile" type="file" accept="video/*">
 
-    <video id="videoPreview" class="preview" controls
-      playsinline style="display:none"></video>
+<video id="videoPreview" class="preview"
+controls playsinline style="display:none"></video>
 
-    <button id="clearVideo" class="secondary" type="button">
-      Clear video
-    </button>
-  </section>
+<button id="clearVideo" class="secondary" type="button">
+Clear video
+</button>
+</section>
 
-  <section class="panel">
-    <h2>2. Test Membership Payment</h2>
-    <p class="muted">
-      This is a test integration. No paid membership or editing feature
-      is activated by this demo.
-    </p>
+<section class="panel">
+<h2>2. Test Membership Payment</h2>
+<p class="muted">
+Test integration only. No real membership is activated.
+</p>
 
-    <div class="price">₹49 <span style="font-size:14px">/ test order</span></div>
+<div class="price">₹49 <span style="font-size:14px">/ test order</span></div>
 
-    <label>
-      <input id="rightsCheck" type="checkbox">
-      I confirm that I have permission to use the video I upload.
-    </label>
+<label>
+<input id="rightsCheck" type="checkbox">
+I confirm that I have permission to use this video.
+</label>
 
-    <button id="payButton" class="primary" type="button">
-      Pay ₹49 — Test Mode
-    </button>
+<button id="payButton" class="primary" type="button">
+Pay ₹49 — Test Mode
+</button>
 
-    <div id="status" class="status" role="status" aria-live="polite"></div>
-  </section>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+</section>
 
-  <section class="panel">
-    <h2>3. Available Demo Tools</h2>
-    <p class="muted">
-      Video preview is available locally in your browser. AI editing,
-      copyright checks, cloud processing, and subscription activation
-      require separate implementation.
-    </p>
-  </section>
+<section class="panel">
+<h2>3. Demo Tools</h2>
+<p class="muted">
+Video preview works locally. AI editing and cloud processing
+require separate implementation.
+</p>
+</section>
 </main>
 
-<footer>
-  Use only videos you have permission to use. Test payments only.
-</footer>
+<footer>Test payments only. Use videos you have permission to use.</footer>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script>
 "use strict";
 
-// Keep the backend URL exact.
+// BACKEND URL
 const BACKEND_URL = "https://remove-copyright-free-4.onrender.com";
 
-// Paste your Razorpay TEST KEY ID below.
-// It starts with rzp_test_.
-// NEVER put your Key Secret in this file.
+// TEST KEY ID ONLY - NEVER PUT SECRET KEY HERE
 const RAZORPAY_KEY_ID = "rzp_test_Tu2HTnJ6C9OUHO";
 
 const payButton = document.getElementById("payButton");
@@ -188,192 +138,195 @@ const statusBox = document.getElementById("status");
 const rightsCheck = document.getElementById("rightsCheck");
 const videoFile = document.getElementById("videoFile");
 const videoPreview = document.getElementById("videoPreview");
+
 let previewUrl = null;
 
-function showStatus(message, type = "info") {
-  statusBox.textContent = message;
-  statusBox.className = "status show " + type;
+function showStatus(message, type="info"){
+ statusBox.textContent = message;
+ statusBox.className = "status show " + type;
 }
 
-videoFile.addEventListener("change", function () {
-  if (previewUrl) URL.revokeObjectURL(previewUrl);
-  previewUrl = null;
+videoFile.addEventListener("change", function(){
+ if(previewUrl) URL.revokeObjectURL(previewUrl);
+ previewUrl = null;
 
-  const file = videoFile.files && videoFile.files[0];
-  if (!file) {
-    videoPreview.removeAttribute("src");
-    videoPreview.style.display = "none";
-    return;
-  }
+ const file = videoFile.files && videoFile.files[0];
 
-  if (!file.type.startsWith("video/")) {
-    showStatus("Please choose a valid video file.", "error");
-    videoFile.value = "";
-    return;
-  }
-
-  previewUrl = URL.createObjectURL(file);
-  videoPreview.src = previewUrl;
-  videoPreview.style.display = "block";
-  showStatus("Video selected. Preview is ready.", "success");
-});
-
-document.getElementById("clearVideo").addEventListener("click", function () {
-  videoFile.value = "";
-  videoPreview.pause();
+ if(!file){
   videoPreview.removeAttribute("src");
-  videoPreview.load();
   videoPreview.style.display = "none";
+  return;
+ }
 
-  if (previewUrl) URL.revokeObjectURL(previewUrl);
-  previewUrl = null;
-  showStatus("Video preview cleared.", "info");
+ if(!file.type.startsWith("video/")){
+  showStatus("Please select a valid video.", "error");
+  videoFile.value = "";
+  return;
+ }
+
+ previewUrl = URL.createObjectURL(file);
+ videoPreview.src = previewUrl;
+ videoPreview.style.display = "block";
+ showStatus("Video preview ready.", "success");
 });
 
-async function startPayment() {
-  if (!rightsCheck.checked) {
-    showStatus("Please confirm that you have permission to use your video.", "error");
-    return;
+document.getElementById("clearVideo").addEventListener("click", function(){
+ videoFile.value = "";
+ videoPreview.pause();
+ videoPreview.removeAttribute("src");
+ videoPreview.load();
+ videoPreview.style.display = "none";
+
+ if(previewUrl) URL.revokeObjectURL(previewUrl);
+ previewUrl = null;
+
+ showStatus("Video cleared.", "info");
+});
+
+async function startPayment(){
+
+ if(!rightsCheck.checked){
+  showStatus("Please confirm video usage permission.", "error");
+  return;
+ }
+
+ if(!RAZORPAY_KEY_ID.startsWith("rzp_test_")){
+  showStatus("Invalid Test Key ID in website code.", "error");
+  return;
+ }
+
+ if(typeof window.Razorpay !== "function"){
+  showStatus("Razorpay Checkout did not load. Check internet.", "error");
+  return;
+ }
+
+ payButton.disabled = true;
+ payButton.textContent = "Creating test order...";
+ showStatus("Connecting to backend...", "info");
+
+ try{
+
+  const response = await fetch(
+   BACKEND_URL + "/api/create-order",
+   {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+     amount:4900,
+     currency:"INR"
+    })
+   }
+  );
+
+  const orderData = await response.json().catch(()=>({}));
+
+  if(!response.ok){
+   throw new Error(
+    orderData.details ||
+    orderData.error ||
+    orderData.message ||
+    "Order creation failed. HTTP " + response.status
+   );
   }
 
-  if (!RAZORPAY_KEY_ID.startsWith("rzp_test_") ||
-      RAZORPAY_KEY_ID.includes("PASTE_YOUR_KEY_ID")) {
-    showStatus(
-      "Add your Razorpay TEST Key ID in index.html first. Do not add your Secret Key here.",
-      "error"
-    );
-    return;
+  const orderId = orderData.order_id ||
+   (orderData.order && orderData.order.id) ||
+   orderData.id;
+
+  if(!orderId){
+   throw new Error("Backend did not return an Order ID.");
   }
 
-  if (typeof window.Razorpay !== "function") {
-    showStatus(
-      "Razorpay Checkout could not load. Check your internet connection and try again.",
-      "error"
-    );
-    return;
+  // Use backend Key ID if provided, otherwise website Test Key ID.
+  const checkoutKey = orderData.key_id || RAZORPAY_KEY_ID;
+
+  if(checkoutKey !== RAZORPAY_KEY_ID){
+   throw new Error("Website and backend Key IDs do not match.");
   }
 
-  payButton.disabled = true;
-  payButton.textContent = "Creating test order...";
-  showStatus("Connecting to the payment backend...", "info");
+  const options = {
+   key:checkoutKey,
+   order_id:orderId,
+   amount:orderData.amount || 4900,
+   currency:orderData.currency || "INR",
+   name:"AI Video Studio",
+   description:"Test payment only",
 
-  try {
-    const response = await fetch(BACKEND_URL + "/api/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: 4900,
-        currency: "INR"
-      })
-    });
+   handler:async function(paymentResponse){
 
-    const orderData = await response.json().catch(() => ({}));
+    showStatus("Verifying test payment...", "info");
 
-    if (!response.ok) {
+    try{
+
+     const verifyResponse = await fetch(
+      BACKEND_URL + "/api/verify-payment",
+      {
+       method:"POST",
+       headers:{"Content-Type":"application/json"},
+       body:JSON.stringify({
+        razorpay_payment_id:paymentResponse.razorpay_payment_id,
+        razorpay_order_id:paymentResponse.razorpay_order_id,
+        razorpay_signature:paymentResponse.razorpay_signature
+       })
+      }
+     );
+
+     const verifyData = await verifyResponse.json().catch(()=>({}));
+
+     if(!verifyResponse.ok || verifyData.verified !== true){
       throw new Error(
-  orderData.details ||
-  orderData.error ||
-  orderData.message ||
-  "Backend could not create the order. HTTP " + response.status
-);
-        
-    }
-
-    const orderId = orderData.order_id ||
-      (orderData.order && orderData.order.id) ||
-      orderData.id;
-
-    if (!orderId) {
-      throw new Error(
-        "Backend response has no order_id. Check your /api/create-order route."
+       verifyData.error ||
+       verifyData.message ||
+       "Payment verification failed."
       );
+     }
+
+     showStatus(
+      "Test payment verified successfully. No membership has been activated.",
+      "success"
+     );
+
+    }catch(error){
+     showStatus("Verification error: " + error.message, "error");
+    }finally{
+     payButton.disabled = false;
+     payButton.textContent = "Pay ₹49 — Test Mode";
     }
+   },
 
-    const options = {
-      key: RAZORPAY_KEY_ID,
-      order_id: orderId,
-      amount: orderData.amount || 4900,
-      currency: orderData.currency || "INR",
-      name: "AI Video Studio",
-      description: "Test payment — not a real membership purchase",
+   modal:{
+    ondismiss:function(){
+     showStatus("Checkout closed.", "info");
+     payButton.disabled = false;
+     payButton.textContent = "Pay ₹49 — Test Mode";
+    }
+   },
 
-      handler: async function (paymentResponse) {
-        showStatus("Payment returned. Verifying on the backend...", "info");
+   theme:{color:"#7565ff"}
+  };
 
-        try {
-          const verifyResponse = await fetch(
-            BACKEND_URL + "/api/verify-payment",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                razorpay_payment_id: paymentResponse.razorpay_payment_id,
-                razorpay_order_id: paymentResponse.razorpay_order_id,
-                razorpay_signature: paymentResponse.razorpay_signature
-              })
-            }
-          );
+  const checkout = new Razorpay(options);
 
-          const verifyData = await verifyResponse.json().catch(() => ({}));
+  checkout.on("payment.failed", function(event){
+   const message = event && event.error && event.error.description;
+   showStatus("Test payment failed: " + (message || "Please try again."), "error");
+   payButton.disabled = false;
+   payButton.textContent = "Pay ₹49 — Test Mode";
+  });
 
-          if (!verifyResponse.ok ||
-              verifyData.status === "failed" ||
-              verifyData.success === false ||
-              verifyData.verified === false) {
-            throw new Error(
-              verifyData.error || verifyData.message ||
-              "Payment verification failed."
-            );
-          }
+  checkout.open();
+  showStatus("Test order created. Opening checkout...", "success");
 
-          showStatus(
-            "Backend accepted the verification response. Check your Razorpay Test Dashboard. This demo does not activate a paid membership.",
-            "success"
-          );
-        } catch (error) {
-          showStatus(
-            "Verification error: " + error.message +
-            " Check the backend route and server logs.",
-            "error"
-          );
-        } finally {
-          payButton.disabled = false;
-          payButton.textContent = "Pay ₹49 — Test Mode";
-        }
-      },
+ }catch(error){
 
-      modal: {
-        ondismiss: function () {
-          showStatus("Checkout closed. No successful payment was confirmed.", "info");
-          payButton.disabled = false;
-          payButton.textContent = "Pay ₹49 — Test Mode";
-        }
-      },
+  showStatus(
+   "Payment setup error: " + error.message,
+   "error"
+  );
 
-      theme: { color: "#7565ff" }
-    };
-
-    const checkout = new Razorpay(options);
-
-    checkout.on("payment.failed", function (event) {
-      const description = event && event.error && event.error.description;
-      showStatus("Test payment failed: " + (description || "Please try again."), "error");
-      payButton.disabled = false;
-      payButton.textContent = "Pay ₹49 — Test Mode";
-    });
-
-    checkout.open();
-    showStatus("Test order created. Opening Razorpay Checkout...", "success");
-
-  } catch (error) {
-    showStatus(
-      "Payment setup error: " + error.message +
-      " Check that the Render backend is awake and the API route is correct.",
-      "error"
-    );
-    payButton.disabled = false;
-    payButton.textContent = "Pay ₹49 — Test Mode";
-  }
+  payButton.disabled = false;
+  payButton.textContent = "Pay ₹49 — Test Mode";
+ }
 }
 
 payButton.addEventListener("click", startPayment);
